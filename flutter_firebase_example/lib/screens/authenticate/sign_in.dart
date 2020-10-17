@@ -23,12 +23,12 @@ class _SignInState extends State<SignIn> {
         child: RaisedButton(
           child: Text('Sign in Anonymouse'),
           onPressed: () async {
-            dynamic result = await _auth.signInAnonymouse();
-            if (result == null) {
+            dynamic resultFireaseUser = await _auth.signInAnonymouse();
+            if (resultFireaseUser == null) {
               print('error signing in');
             } else {
               print('signed in');
-              print(result);
+              print(resultFireaseUser.uid);
             }
           },
         ),

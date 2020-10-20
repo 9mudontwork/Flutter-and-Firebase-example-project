@@ -1,5 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart' as firebase;
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_firebase_example/models/user.dart' as model;
+
+// handle exception
+// https://medium.com/flutter-community/firebase-auth-exceptions-handling-flutter-54ab59c2853d
 
 class AuthService {
   final firebase.FirebaseAuth _firebaseAuth = firebase.FirebaseAuth.instance;
@@ -24,6 +28,34 @@ class AuthService {
     } catch (e) {
       print(e.toString());
       return null;
+    }
+  }
+
+  // Future registerWithEmailAndPassword(String email, String password) async {
+  //   try {
+  //     firebase.UserCredential userCredential = await _firebaseAuth
+  //         .createUserWithEmailAndPassword(email: email, password: password);
+  //     firebase.User firebaseUser = userCredential.user;
+
+  //     return _userFromFirebaseUser(firebaseUser);
+  //   } catch (e) {
+  //     print(e.toString());
+  //     return null;
+  //   }
+  // }
+  Future registerWithEmailAndPassword(String email, String password) async {
+    try {
+      firebase.UserCredential userCredential = await _firebaseAuth
+          .createUserWithEmailAndPassword(email: email, password: password);
+      firebase.User firebaseUser = userCredential.user;
+
+      return _userFromFirebaseUser(firebaseUser);
+    } on firebase.FirebaseAuthException catch (e) {
+      print('Failed with error code: ${e.code}');
+      print(e.message);
+      return null;
+    } catch (e) {
+      print(e.toString());
     }
   }
 

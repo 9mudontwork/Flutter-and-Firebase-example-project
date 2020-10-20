@@ -22,11 +22,11 @@ class _SignInState extends State<SignIn> {
       appBar: AppBar(
         backgroundColor: Colors.brown[400],
         elevation: 0.0,
-        title: Text('Sign in to Firebase Example'),
+        title: Text('เข้าสู่ระบบ Firebase Example'),
         actions: <Widget>[
           FlatButton.icon(
             icon: Icon(Icons.person),
-            label: Text('Register'),
+            label: Text('ลงทะเบียน'),
             onPressed: () {
               widget.toggleView();
             },
@@ -55,7 +55,7 @@ class _SignInState extends State<SignIn> {
               RaisedButton(
                 color: Colors.pink[400],
                 child: Text(
-                  'Sign In',
+                  'เข้าสู่ระบบ',
                   style: TextStyle(color: Colors.white),
                 ),
                 onPressed: () async {

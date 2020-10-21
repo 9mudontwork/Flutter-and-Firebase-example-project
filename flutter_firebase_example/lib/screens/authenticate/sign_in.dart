@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_firebase_example/screens/services/auth.dart';
+import 'package:flutter_firebase_example/shared/constants.dart';
 
 class SignIn extends StatefulWidget {
   final Function toggleView;
@@ -43,6 +44,7 @@ class _SignInState extends State<SignIn> {
             children: <Widget>[
               SizedBox(height: 20),
               TextFormField(
+                decoration: textInputDecoration.copyWith(hintText: 'อีเมล'),
                 validator: (value) => value.isEmpty ? 'กรุณากรอกอีเมล' : null,
                 onChanged: (value) {
                   setState(() => email = value);
@@ -50,9 +52,10 @@ class _SignInState extends State<SignIn> {
               ),
               SizedBox(height: 20),
               TextFormField(
+                decoration: textInputDecoration.copyWith(hintText: 'รหัสผ่าน'),
                 obscureText: true,
                 validator: (value) =>
-                    value.length < 6 ? 'พาสเวิร์ด 6 ตัวอักษร' : null,
+                    value.length < 6 ? 'รหัสผ่าน 6 ตัวอักษร' : null,
                 onChanged: (value) {
                   setState(() => password = value);
                 },

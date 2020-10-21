@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_firebase_example/screens/services/auth.dart';
+import 'package:flutter_firebase_example/shared/constants.dart';
 
 class Register extends StatefulWidget {
   final Function toggleView;
@@ -43,6 +44,7 @@ class _RegisterState extends State<Register> {
             children: <Widget>[
               SizedBox(height: 20),
               TextFormField(
+                decoration: textInputDecoration.copyWith(hintText: 'อีเมล'),
                 validator: (value) => value.isEmpty ? 'กรุณากรอกอีเมล' : null,
                 onChanged: (value) {
                   setState(() => email = value);
@@ -50,8 +52,9 @@ class _RegisterState extends State<Register> {
               ),
               SizedBox(height: 20),
               TextFormField(
+                decoration: textInputDecoration.copyWith(hintText: 'รหัสผ่าน'),
                 validator: (value) =>
-                    value.length < 6 ? 'พาสเวิร์ดต้องมากกว่า 6 ตัวอักษร' : null,
+                    value.length < 6 ? 'รหัสผ่านต้องมากกว่า 6 ตัวอักษร' : null,
                 obscureText: true,
                 onChanged: (value) {
                   setState(() => password = value);

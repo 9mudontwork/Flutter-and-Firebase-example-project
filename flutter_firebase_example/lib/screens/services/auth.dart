@@ -31,18 +31,22 @@ class AuthService {
     }
   }
 
-  // Future registerWithEmailAndPassword(String email, String password) async {
-  //   try {
-  //     firebase.UserCredential userCredential = await _firebaseAuth
-  //         .createUserWithEmailAndPassword(email: email, password: password);
-  //     firebase.User firebaseUser = userCredential.user;
+  Future signInWithEmailAndPassword(String email, String password) async {
+    try {
+      firebase.UserCredential userCredential = await _firebaseAuth
+          .signInWithEmailAndPassword(email: email, password: password);
+      firebase.User firebaseUser = userCredential.user;
 
-  //     return _userFromFirebaseUser(firebaseUser);
-  //   } catch (e) {
-  //     print(e.toString());
-  //     return null;
-  //   }
-  // }
+      return _userFromFirebaseUser(firebaseUser);
+    } on firebase.FirebaseAuthException catch (e) {
+      print('error จาก firebase: ${e.code}');
+      print(e.message);
+      return null;
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
   Future registerWithEmailAndPassword(String email, String password) async {
     try {
       firebase.UserCredential userCredential = await _firebaseAuth
@@ -51,7 +55,7 @@ class AuthService {
 
       return _userFromFirebaseUser(firebaseUser);
     } on firebase.FirebaseAuthException catch (e) {
-      print('Failed with error code: ${e.code}');
+      print('error จาก firebase: ${e.code}');
       print(e.message);
       return null;
     } catch (e) {

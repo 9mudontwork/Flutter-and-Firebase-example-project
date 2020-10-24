@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart' as firebase;
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_firebase_example/models/user.dart' as model;
+import 'package:flutter_firebase_example/screens/services/database.dart';
 
 // handle exception
 // https://medium.com/flutter-community/firebase-auth-exceptions-handling-flutter-54ab59c2853d
@@ -36,6 +37,10 @@ class AuthService {
       firebase.UserCredential userCredential = await _firebaseAuth
           .signInWithEmailAndPassword(email: email, password: password);
       firebase.User firebaseUser = userCredential.user;
+
+      // สร้าง document ใหม่ สำหรับ user
+      await DatabaseService(uid: firebaseUser.uid)
+          .updateUserData('0', 'new crew member', 100);
 
       return _userFromFirebaseUser(firebaseUser);
     } on firebase.FirebaseAuthException catch (e) {

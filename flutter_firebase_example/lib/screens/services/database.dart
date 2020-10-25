@@ -4,6 +4,7 @@ class DatabaseService {
   final String uid;
   DatabaseService({this.uid});
 
+  // กำหนดอ้างอิง collection
   final CollectionReference brewCollection =
       FirebaseFirestore.instance.collection('brews');
 
@@ -13,5 +14,10 @@ class DatabaseService {
       'name': name,
       'strength': strength,
     });
+  }
+
+  // ทำการstream กับ collection brew
+  Stream<QuerySnapshot> get brews {
+    return brewCollection.snapshots();
   }
 }

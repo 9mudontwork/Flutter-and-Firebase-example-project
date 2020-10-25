@@ -38,10 +38,6 @@ class AuthService {
           .signInWithEmailAndPassword(email: email, password: password);
       firebase.User firebaseUser = userCredential.user;
 
-      // สร้าง document ใหม่ สำหรับ user
-      await DatabaseService(uid: firebaseUser.uid)
-          .updateUserData('0', 'new crew member', 100);
-
       return _userFromFirebaseUser(firebaseUser);
     } on firebase.FirebaseAuthException catch (e) {
       print('error จาก firebase: ${e.code}');
@@ -57,6 +53,10 @@ class AuthService {
       firebase.UserCredential userCredential = await _firebaseAuth
           .createUserWithEmailAndPassword(email: email, password: password);
       firebase.User firebaseUser = userCredential.user;
+
+      // สร้าง document ใหม่ สำหรับ user
+      await DatabaseService(uid: firebaseUser.uid)
+          .updateUserData('0', 'new crew member', 100);
 
       return _userFromFirebaseUser(firebaseUser);
     } on firebase.FirebaseAuthException catch (e) {
